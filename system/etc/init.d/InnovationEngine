@@ -1,0 +1,280 @@
+#!/system/bin/sh
+#NGH Innovation Engine Version 18
+#Written and by EVO4G
+#Optimized for HTC Rider
+#You may use, edit, and/or redistribute Innovation Engine.
+#Please leave credits when redistributing.
+		
+#Stage 0 - Loopy Smoothness Tweak
+
+for n in 1 2
+		do
+		#
+		#
+		NUMBER_OF_CHECKS=20      			# Total number of rechecks before ending 1st loop
+		SLEEP_TIME=1						# Number of seconds between rechecking processes
+		PROCESSES_TOTAL=12   				# Must be edited to match the number of processes to be checked
+		DEBUG_ECHO=0						# Debug on/off
+
+		#
+		CHECK_COUNT=0						# Don't edit
+		P_CHECK=0						# Don't edit
+		CHECK_OK=0						# Unused
+
+		PROCESS_1=0; PROCESS_2=0; PROCESS_3=0; PROCESS_4=0; PROCESS_5=0; PROCESS_6=0;
+		PROCESS_7=0; PROCESS_8=0; PROCESS_9=0; PROCESS_10=0; PROCESS_11=0; PROCESS_12=0;
+
+		if [ \$n -eq "1" ]; then
+			if [ \$DEBUG_ECHO -eq "1" ]; then
+				echo ""
+				echo "LST Debug: \$(date)"
+				echo "LST Debug: Initiate"
+			fi;
+
+			# Pause and then loop until kswapd0 is found, which should be instant anyway
+			sleep 1
+			SWAP_SLEEP_TIME=1; SWAP_NUMBER_OF_CHECKS=30; SWAP_CHECK_COUNT=0; SWAP_CHECK_COUNT_OK=0; while [ \$SWAP_CHECK_COUNT -lt \$SWAP_NUMBER_OF_CHECKS ]; do if [ \`pidof kswapd0\` ]; then renice 19 \`pidof kswapd0\`; SWAP_CHECK_COUNT=\$SWAP_NUMBER_OF_CHECKS; SWAP_CHECK_COUNT_OK=1; else sleep \$SWAP_SLEEP_TIME; fi; SWAP_CHECK_COUNT=\`expr \$SWAP_CHECK_COUNT + 1\`; done; if [ \$SWAP_CHECK_COUNT_OK -lt 1 ]; then echo "LST Debug: 'kswapd0' expired after \`expr \$SWAP_CHECK_COUNT \* \$SWAP_SLEEP_TIME\` seconds"; fi;
+
+			if [ \$DEBUG_ECHO -eq "1" ]; then
+				echo "LST Debug: \$(date)";
+				echo "LST Debug: kswapd0 found";
+			fi;
+		fi;
+
+		# Check briefly one more time
+		if [ \$n -eq "2" ]; then
+			if [ \$DEBUG_ECHO -eq "1" ]; then
+				echo "LST Debug: 2nd loop"
+			fi;
+			NUMBER_OF_CHECKS=6					# Editing not recommended
+			SLEEP_TIME=5					# Editing not recommended
+		fi;
+	
+	while [ \$CHECK_COUNT -lt \$NUMBER_OF_CHECKS ];
+		do
+		# Main system apps
+	
+			if [ \$PROCESS_1 -eq "0" ]; then PNAME="com.htc.launcher"; NICELEVEL=-20; if [ \`pidof $PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_2=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_2 -eq "0" ]; then PNAME="com.android.systemui"; NICELEVEL=-20; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_3=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_3 -eq "0" ]; then PNAME="com.android.settings"; NICELEVEL=-19; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_5=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_4 -eq "0" ]; then PNAME="com.android.browser"; NICELEVEL=-19; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_10=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_5 -eq "0" ]; then PNAME="com.android.camera"; NICELEVEL=-17; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_11=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_6 -eq "0" ]; then PNAME="com.android.htccontacts"; NICELEVEL=-17; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_12=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_7 -eq "0" ]; then PNAME="com.android.mms"; NICELEVEL=-17; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_13=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_8 -eq "0" ]; then PNAME="com.android.htcdialer"; NICELEVEL=17; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_14=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_9 -eq "0" ]; then PNAME="com.htc.android.mail"; NICELEVEL=-16; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_15=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_10 -eq "0" ]; then PNAME="com.htc.album"; NICELEVEL=-18; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_16=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_11 -eq "0" ]; then PNAME="com.htc.calendar"; NICELEVEL=-16; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_17=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+			if [ \$PROCESS_12 -eq "0" ]; then PNAME="com.htc.music"; NICELEVEL=-16; if [ \`pidof \$PNAME\` ]; then renice \$NICELEVEL \`pidof \$PNAME\`; PROCESS_18=1; P_CHECK=\`expr \$P_CHECK + 1\`; fi; fi;
+
+			# If all processes are done, loop can finish early
+			if [ \$P_CHECK -ge \$PROCESSES_TOTAL ]; then CHECK_COUNT=\$NUMBER_OF_CHECKS; else sleep \$SLEEP_TIME; fi;
+
+			CHECK_COUNT=\`expr \$CHECK_COUNT + 1\`;
+			done
+
+			if [ \$DEBUG_ECHO -eq "1" ]; then
+			echo "LST Debug: \$(date)"
+			if [ \$PROCESS_1 -eq "0" ]; then echo "LST Debug: PROCESS_1 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_2 -eq "0" ]; then echo "LST Debug: PROCESS_2 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_3 -eq "0" ]; then echo "LST Debug: PROCESS_3 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_4 -eq "0" ]; then echo "LST Debug: PROCESS_4 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_5 -eq "0" ]; then echo "LST Debug: PROCESS_5 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_6 -eq "0" ]; then echo "LST Debug: PROCESS_6 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_7 -eq "0" ]; then echo "LST Debug: PROCESS_7 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_8 -eq "0" ]; then echo "LST Debug: PROCESS_8 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_9 -eq "0" ]; then echo "LST Debug: PROCESS_9 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_10 -eq "0" ]; then echo "LST Debug: PROCESS_10 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_11 -eq "0" ]; then echo "LST Debug: PROCESS_11 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			if [ \$PROCESS_12 -eq "0" ]; then echo "LST Debug: PROCESS_12 expired after \`expr \$CHECK_COUNT \* \$SLEEP_TIME\` seconds"; fi;
+			#
+			echo "LST Debug: Checking complete"
+			fi;
+	done
+			#
+			if [ \$DEBUG_ECHO -eq "1" ]; then
+				echo "LST Debug: Done"
+			#
+			fi;
+		
+#Stage 1 - Touchscreen sensitivity enhancements
+echo 7035 > /sys/class/touch/switch/set_touchscreen;
+echo 8002 > /sys/class/touch/switch/set_touchscreen;
+echo 11000 > /sys/class/touch/switch/set_touchscreen;
+echo 13060 > /sys/class/touch/switch/set_touchscreen;
+echo 14005 > /sys/class/touch/switch/set_touchscreen;
+
+#Stage 2 - Zipalign
+LOG_FILE=/data/zipalign.log
+ZIPALIGNDB=/data/zipalign.db
+
+if [ ! -f $ZIPALIGNDB ]; then
+	touch $ZIPALIGNDB;
+fi;
+
+for DIR in /system/app /data/app ; do
+  cd $DIR
+  for APK in *.apk ; do
+    if [ $APK -ot $ZIPALIGNDB ] && [ $(grep "$DIR/$APK" $ZIPALIGNDB|wc -l) -gt 0 ] ; then
+      echo "Already checked: $DIR/$APK" | tee -a $LOG_FILE
+    else
+      zipalign -c 4 $APK
+      if [ $? -eq 0 ] ; then
+        echo "Already aligned: $DIR/$APK" | tee -a $LOG_FILE
+        grep "$DIR/$APK" $ZIPALIGNDB > /dev/null || echo $DIR/$APK >> $ZIPALIGNDB
+      else
+        echo "Now aligning: $DIR/$APK" | tee -a $LOG_FILE
+        zipalign -f 4 $APK /cache/$APK
+        busybox mount -o rw,remount /system
+        cp -f -p /cache/$APK $APK
+        busybox rm -f /cache/$APK
+        grep "$DIR/$APK" $ZIPALIGNDB > /dev/null || echo $DIR/$APK >> $ZIPALIGNDB
+      fi
+    fi
+  done
+done
+
+busybox mount -o ro,remount /system
+touch $ZIPALIGNDB
+
+#Stage 3 - VM enhancements
+echo "1000" > /proc/sys/vm/dirty_expire_centisecs;
+echo "4096" > /proc/sys/vm/min_free_kbytes;
+echo "0" > /proc/sys/vm/oom_kill_allocating_task;
+echo "0" > /proc/sys/vm/panic_on_oom;
+echo "1" > /proc/sys/vm/overcommit_memory;
+echo "0" > /proc/sys/vm/block_dump;
+echo "0" > /proc/sys/vm/oom_dump_tasks;
+echo "3" > /proc/sys/vm/drop_caches;
+echo "2000" > /proc/sys/vm/dirty_writeback_centisecs;
+echo "3" > /proc/sys/vm/page-cluster;
+echo "10" > /proc/sys/vm/vfs_cache_pressure;
+echo "0" > /proc/sys/vm/swappiness;
+echo "0" > /proc/sys/vm/dirty_background_bytes;
+echo "4" > /proc/sys/vm/dirty_background_ratio;
+echo "15" > /proc/sys/vm/dirty_ratio;
+echo "0" > /proc/sys/vm/laptop_mode;
+echo "10" > /proc/sys/fs/lease-break-time;
+
+#Stage 4 - Miscellaneous enhancements
+#Kernel tweaks
+echo "175000" > /proc/sys/kernel/sched_min_granularity_ns;
+echo "325000" > /proc/sys/kernel/sched_latency_ns;
+echo "0" > /proc/sys/kernel/sched_wakeup_granularity_ns;
+echo "0" > /proc/sys/kernel/hung_task_timeout_secs;
+echo "16000" > /proc/sys/kernel/msgmni;
+echo "84000" > /proc/sys/kernel/msgmax;
+echo "15834233" > /proc/sys/kernel/sched_features;
+echo "268435500" > /proc/sys/kernel/shmmax;
+echo "500,512000,64,2048" > /proc/sys/kernel/sem;
+echo "30000" > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/sampling_rate
+echo "65" > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/up_threshold
+echo "1" > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
+
+#Sysctl
+sysctl -p
+sysctl -w fs.nr_open=1053696 
+sysctl -w fs.inotify.max_queued_events=32000 
+sysctl -w fs.inotify.max_user_instances=256 
+sysctl -w fs.inotify.max_user_watches=10240 
+sysctl -w fs.file-max=165164
+sysctl -w kernel.threads-max=525810 
+sysctl -w kernel.random.write_wakeup_threshold=256 
+sysctl -w kernel.random.read_wakeup_threshold=128 
+sysctl -w kernel.panic=5
+sysctl -w kernel.shmall=16777216 
+sysctl -w kernel.shmmax=268435456 
+sysctl -w kernel.sched_compat_yield=1
+
+#Disable VSync
+busybox mount -t debugfs debugfs /sys/kernel/debug
+busybox echo "0" >/sys/kernel/debug/msm_fb/0/vsync_enable
+umount /sys/kernel/debug
+
+#Sleepers
+echo "NO_NORMALIZED_SLEEPER" > /sys/kernel/debug/sched_features
+echo "NO_GENTLE_FAIR_SLEEPERS" > /sys/kernel/debug/sched_features
+echo "NO_NEW_FAIR_SLEEPERS" > /sys/kernel/debug/sched_features
+
+#Low memory killer
+echo "0,1,2,4,6,15" > /sys/module/lowmemorykiller/parameters/adj
+echo "2560,4096,6144,12288,14336,18432" > /sys/module/lowmemorykiller/parameters/minfree
+
+#KSM
+echo 4000 > /sys/kernel/mm/ksm/sleep_millisecs
+echo 128 > /sys/kernel/mm/ksm/pages_to_scan
+echo 1 > /sys/kernel/mm/ksm/run
+
+#I/O tweaks
+echo "0 0 0 1 1 1 2 2" > /sys/devices/system/cpu/cpu0/cpufreq/busfreq_static
+echo "enabled" > /sys/devices/system/cpu/cpu0/cpufreq/busfreq_static
+
+#Stage 5 - Mount related enhancements
+#Mount partitions to R/W
+mount -o rw,remount /sys
+mount -o rw,remount /system
+mount -o rw,remount /data
+
+#Journalism related scripts
+tune2fs -o journal_data_writeback /block/path/to/system
+tune2fs -O ^has_journal /block/path/to/system
+tune2fs -o journal_data_writeback /block/path/to/cache
+tune2fs -O ^has_journal /block/path/to/cache
+tune2fs -o journal_data_writeback /block/path/to/data
+tune2fs -O ^has_journal /block/path/to/data
+
+#Flags
+LOOP=`ls -d /sys/block/loop*`;
+RAM=`ls -d /sys/block/ram*`;
+MMC=`ls -d /sys/block/mmc*`;
+for j in $LOOP $RAM
+do
+echo "0" > $j/queue/rotational;
+echo "2048" > $j/queue/read_ahead_kb;
+done
+
+#Load tweaks on boot
+STL=`ls -d /sys/block/stl*`
+BML=`ls -d /sys/block/bml*`
+
+#Stage 6 - SD speed enhancements
+if busybox [ -e /sys/devices/virtual/bdi/179:0/read_ahead_kb -a $SD_BOOST_AT_BOOT -eq 1 ]; then
+	busybox echo $READ_AHEAD_KB > /sys/devices/virtual/bdi/179:0/read_ahead_kb
+fi
+
+#Stage 7 - Cleaning unnecessary files
+rm -f /cache/*.apk
+rm -f /cache/*.tmp
+rm -f /data/dalvik-cache/*.apk
+rm -f /data/dalvik-cache/*.tmp
+
+/bin/mount -o remount,rw /
+/bin/rm -r /voodoo/root/usr/*
+/bin/mount -o remount,ro /
+
+rm -r /data/local/tmp/*
+rm -r /data/tmp/*
+rm -r /data/system/usagestats/*
+rm -r /data/system/appusagestats/*
+rm -r /data/system/dropbox/*
+rm -r /data/tombstones/*
+rm -r /data/anr/*
+
+busybox chmod 000 /data/system/userbehavior.db
+busybox chmod 000 /data/system/usagestats/
+busybox chmod 000 /data/system/dropbox/
+busybox chmod 000 /data/anr/
+busybox chmod 000 /data/tombstones/
+busybox chmod 000 /data/system/appusagestats/
+busybox chmod 000 /data/data/com.google.android.location/files/cache.cell
+busybox chmod 000 /data/data/com.google.android.location/files/cache.wifi
+
+rm /dev/log/main
+
+#Stage 8 - Module injection for Major's kernel
+/system/bin/insmod /system/lib/modules/dma_test.ko
+/system/bin/insmod /system/lib/modules/cpaccess.ko
+/system/bin/insmod /system/lib/modules/bluetooth-power.ko
+/system/bin/insmod /system/lib/modules/msm-buspm-dev.ko
+
+#End of script

@@ -1,0 +1,5 @@
+﻿Project: RIDER_ICS_35_S
+SKU: KT ROM
+ROM Build ID: 402277
+Build ID: 402278; SKU: KT ROM default; CID: default; MNS: default
+Datetime: 2012/07/17 12:51:42

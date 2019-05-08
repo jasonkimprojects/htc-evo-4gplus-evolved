@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<customization_form>
+  <category name="system">
+    <module name="locale">
+      <function>
+        <set name="single">
+          <item name="total_list">en_KR;ko_KR;</item>
+          <item type="boolean" name="en_KR">yes</item>
+          <item type="boolean" name="ko_KR">yes</item>
+        </set>
+      </function>
+    </module>
+    <module name="Settings">
+      <function name="screen_timeout">
+        <set name="plenty">
+          <item name="value1">15000</item>
+          <item name="value2">30000</item>
+          <item name="value3">45000</item>
+          <item name="value4">60000</item>
+          <item name="value5">120000</item>
+          <item name="value6">600000</item>
+          <item name="value7">-1</item>
+        </set>
+      </function>
+    </module>
+    <module name="deviceData">
+      <function>
+        <set name="single">
+          <item name="device_name">HTC_X515E</item>
+        </set>
+      </function>
+    </module>
+    <module name="deviceData1">
+      <function>
+        <set name="single">
+          <item name="sw_number">NA</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <category name="application">
+    <module name="Crash_Report">
+      <function name="setting">
+        <set name="single">
+          <item name="turn_off_report" type="boolean">no</item>
+          <item name="turn_off_application_log" type="boolean">yes</item>
+        </set>
+      </function>
+    </module>
+    <module name="Lockscreen">
+      <function name="idlescreen">
+        <set name="single" max="1">
+          <item name="component">com.htc.weatheridlescreen/com.htc.weatheridlescreen.service.WISService</item>
+        </set>
+      </function>
+    </module>
+    <module name="Drm_Provider">
+      <function name="Drm_Support">
+        <set name="single">
+          <item name="CD">no</item>
+          <item name="SD">no</item>
+        </set>
+      </function>
+    </module>
+    <module name="OOBE">
+      <function name="Step_Config">
+        <set name="single">
+          <item name="SIP_Tutorial" type="boolean">no</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <BootConfiguration>
+    <BootAnimation animation="/system/customize/resource/KT_bootanimation.zip" />
+  </BootConfiguration>
+  <ShutdownConfiguration>
+    <ShutdownAnimation image_png="/system/customize/resource/KT_downanimation.zip" image="" fps="20" />
+  </ShutdownConfiguration>
+  <category name="Settings">
+    <module name="properties">
+      <function>
+        <set name="single">
+          <item name="support_imei">false</item>
+        </set>
+      </function>
+    </module>
+  </category>
+</customization_form>

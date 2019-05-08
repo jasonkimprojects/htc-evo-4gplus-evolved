@@ -1,0 +1,6 @@
+TaskID : 272088
+Project : RIDER_ICS_35_S
+SKU : KT KR[1010]
+ROM Ver : 3.10.1010.1
+Customization Id : 402277
+RCMS Id : 46
